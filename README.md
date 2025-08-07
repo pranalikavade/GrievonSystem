@@ -60,8 +60,47 @@ _______________________
 🔹 Responsive design and animations
 
 🔹 Clean MVC project structure
+__________________________________________
+🚀 How to Run
+
+______________________________
+1) Backend (Spring Boot):
+
+           git clone https://github.com/your-username/grievon-backend.git
+
+2) Open as Maven Project in Eclipse
+
+3)  Run
+
+           GrievonApplication.java 
+
+PostgreSQL Database:
+
+1) Create a database named
+
+       grievondb
+2) create a table named
+
+        grievon_table
+Frontend:
+1) Open the index.html file in browser
+   
+OR
+
+3) Visit http://localhost:9089
 
 ___________________________
  📡 Backend API Output
  ________________________________
  <img width="1920" height="1080" alt="Screenshot 2025-08-06 121546" src="https://github.com/user-attachments/assets/ed6cbf5a-08b4-4e65-bea8-99cf3e689255" />
+ _________________________________
+
+## 🖥️ Frontend Output
+_____________________________
+<img width="1920" height="1080" alt="Screenshot 2025-08-07 135805" src="https://github.com/user-attachments/assets/be5c608d-bade-4a60-b299-e501e1ffdb72" />
+_____________________________________
+<img width="1920" height="1080" alt="Screenshot 2025-08-07 195930" src="https://github.com/user-attachments/assets/bfc20755-4f31-4165-bfd1-2f80486ef7af" />
+
+_____________________________________
+<img width="1920" height="1080" alt="Screenshot 2025-08-07 200324" src="https://github.com/user-attachments/assets/657b3abf-077f-41a1-a5a4-3b5d5456ee27" />
+
