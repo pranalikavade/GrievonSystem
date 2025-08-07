@@ -1,27 +1,103 @@
-document.getElementById('complaintForm').addEventListener('submit', function (e) {
+// Show form section, hide welcome section
+function showForm() {
+  document.getElementById("welcome-section").style.display = "none";
+  document.getElementById("form-section").style.display = "block";
+}
+
+document.getElementById("role").addEventListener("input", function () {
+  const typeList = document.getElementById("typeOptions");
+  typeList.innerHTML = ""; // clear previous options
+
+  const role = this.value;
+  let options = [];
+
+  if (role === "Student") {
+    options = ["Fees Issue", "Exam Issue", "Scholarship Delay"];
+  } else if (role === "Citizen") {
+    options = ["Road Damage", "Garbage Issue", "Water Supply"];
+  } else if (role === "Employee") {
+    options = ["Salary Delay", "Workplace Harassment", "Leave Issue"];
+  }
+
+  options.forEach(item => {
+    const opt = document.createElement("option");
+    opt.value = item;
+    typeList.appendChild(opt);
+  });
+});
+
+// ✅ Function to generate random status
+function getRandomStatus() {
+  const statuses = ["Pending", "Approved", "Processing"];
+  const index = Math.floor(Math.random() * statuses.length);
+  return statuses[index];
+}
+
+// ✅ Form submission with backend connection
+document.getElementById("complaintForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
-  // Input values घ्या
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const complaint = document.getElementById('complaintText').value.trim();
+  // Get values from form
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const role = document.getElementById("role").value;
+  const type = document.getElementById("type").value;
+  const details = document.getElementById("details").value;
 
-  // Success message दाखवा
-  const successMessage = document.getElementById('successMessage');
-  successMessage.style.display = 'block';
+  const status = getRandomStatus();
 
-  // Complaint Status section मध्ये entry add करा
-  const statusList = document.getElementById('complaintStatusList');
-  const complaintEntry = document.createElement('div');
-  complaintEntry.classList.add('complaint-entry');
-  complaintEntry.innerHTML = `
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Complaint:</strong> ${complaint}</p>
-    <p><strong>Status:</strong> Processing</p>
-  `;
-  statusList.appendChild(complaintEntry);
+  const complaintData = {
+    name: name,
+    email: email,
+    role: role,
+    type: type,
+    details: details,
+    status: status
+  };
 
-  // Form reset करा
-  document.getElementById('complaintForm').reset();
+  // ✅ Backend connection using fetch
+  fetch("http://localhost:9089/api/complaints", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(complaintData)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Failed to submit complaint");
+      }
+      return response.json();
+    })
+    .then(data => {
+      // Insert into table
+      const tableBody = document.getElementById("dataTableBody");
+      const newRow = document.createElement("tr");
+
+      newRow.innerHTML = `
+        <td>${data.name}</td>
+        <td>${data.email}</td>
+        <td>${data.role}</td>
+        <td>${data.type}</td>
+        <td>${data.details}</td>
+        <td>${data.status}</td>
+      `;
+      tableBody.appendChild(newRow);
+
+      // Show popup
+      const popup = document.getElementById("popupMessage");
+      popup.style.display = "block";
+
+      // Show submitted data section
+      document.getElementById("submittedDataContainer").style.display = "block";
+
+      // Hide popup after 3 seconds and reset form
+      setTimeout(() => {
+        popup.style.display = "none";
+        document.getElementById("complaintForm").reset();
+      }, 3000);
+    })
+    .catch(error => {
+      alert("Error submitting complaint: " + error.message);
+    });
 });
