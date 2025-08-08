@@ -24,6 +24,14 @@ ________________________________________________________________________________
 | Maven           | CSS Animations        |              |
 
 ---
+## Roles & Access
+
+| Role               | Access |
+|--------------------|--------|
+| Student / Citizen  | Submit complaints, View own complaint status |
+| Admin              | View all complaints, Update status, Assign department, Delete complaints |
+| Department Officer | View assigned complaints, Update resolution status |
+---
 
 ## 📁 Project Structure
 
