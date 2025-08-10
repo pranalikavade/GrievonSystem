@@ -112,3 +112,14 @@ _____________________________________
 _____________________________________
 <img width="1920" height="1080" alt="Screenshot 2025-08-07 200324" src="https://github.com/user-attachments/assets/657b3abf-077f-41a1-a5a4-3b5d5456ee27" />
 
+_____________________________________________________
+👨‍💻 Developer Information
+______________________________
+
+Name-Pranali Sandip Kavade
+
+github-pranalikavade
+
+email-pranalikavade73@gmail.com
+________________________
+
